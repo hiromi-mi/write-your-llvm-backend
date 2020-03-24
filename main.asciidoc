@@ -18,17 +18,19 @@ FIXME: 人がLLVMバックエンドを書きたくなるような文章をここ
 
 基本的には https://clang.llvm.org/get_started.html[Getting Started: Building and Running Clang] の通りに作業する。
 
-  [source]
-  -------------------
+[source,sh]
+-------------------
 $ git clone --depth 1 https://github.com/llvm/llvm-project.git
-$ mkdir /tmp/build && cd /tmp/build
+$ mkdir /tmp/build
+$ cd /tmp/build
 $ cmake -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_INSTALL_PREFIX=/usr/local/packages/llvm -G "Unix Makefiles" ~/llvm-project/llvm
 $ make -j4
-  -------------------
+-------------------
 
-ビルド用のディレクトリを別に作ってから `cmake` を実行すること、 `LLVM_ENABLE_PROJECTS` 変数に `clang` を指定することを忘れないように。
+`cmake` 実行前にビルド用ディレクトリを別に作るの忘れないように注意。
+`cmake` を実行時には `LLVM_ENABLE_PROJECTS` 変数に `clang` を指定する。
 `cmake` にエラーが出なければ `Makefile` が生成されるので、 `make` をたたく。 `-j` オプションの後の数字はあなたのCPUのコア数と同じくらいにする。
-`make` が終了すれば `bin/` 以下に 実行ファイルが生成される。
+`make` が終了すればビルド用ディレクトリの `bin/` 以下に実行ファイルが生成される。
 
 === スケルトンバックエンドを追加する
 === 簡易的なアセンブラを実装する
